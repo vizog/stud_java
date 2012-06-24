@@ -1,6 +1,7 @@
 package repository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,18 +38,18 @@ public class TermRepository {
 	public Term findByName(String name) {
 		try {
 			Connection con = JDBCUtil.getConnection();
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("select * from term");
-
-			Term currentTerm = null;
+			PreparedStatement st = con.prepareStatement("select * from term where name = ?");
+			st.setString(1, name);
+			st.execute();
+			ResultSet rs = st.getResultSet();
+			Term term = null;
 			if (rs.next())
-				currentTerm = new Term(rs.getString("name"), rs.getDate("start_date"));
+				term = new Term(rs.getString("name"), rs.getDate("start_date"));
 			JDBCUtil.closeConnection(con);
-			return currentTerm;
+			return term;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
-
 }

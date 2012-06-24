@@ -6,7 +6,7 @@ public class StudyRecord {
 	
 	public StudyRecord(Offering offering) {
 		this.offering = offering;
-		this.grade = 0;
+		this.grade = -1; //set to -1; it means the record has no grade yet
 	}
 
 	public StudyRecord(Offering offering, double grade) {
@@ -24,6 +24,10 @@ public class StudyRecord {
 
 	boolean isPassRec(Course c) {
 		return (offering.getCourse().equals(c)) && (grade >= 10);
+	}
+	
+	public boolean isCurrentTermRec(Course c) {
+		return (offering.getCourse().equals(c)) && (grade == -1);
 	}
 
 	public int getUnits() {

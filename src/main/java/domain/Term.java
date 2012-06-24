@@ -50,5 +50,12 @@ public class Term {
 		return startDate;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(obj != null && obj instanceof Term && ((Term) obj).getName().equalsIgnoreCase(this.getName()))
+			return true;
+		return super.equals(obj);
+	}
 	
 }
