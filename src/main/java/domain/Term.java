@@ -7,7 +7,7 @@ import java.util.List;
 import repository.OfferingRepository;
 
 
-public class Term {
+public class Term extends BaseDomain{
 	private String name;
 	private Date startDate;
 	private List<Offering> offerings;

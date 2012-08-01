@@ -1,6 +1,6 @@
 package domain;
 
-public class StudyRecord {
+public class StudyRecord extends BaseDomain {
 	private double grade;
 	private Offering offering;
 	

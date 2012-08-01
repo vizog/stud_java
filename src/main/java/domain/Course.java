@@ -5,7 +5,7 @@ import repository.CourseRepository;
 
 
 
-public class Course {
+public class Course extends BaseDomain {
 	private String id;
 	private String name;
 	private int units;

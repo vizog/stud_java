@@ -2,7 +2,7 @@ package domain;
 import java.util.Date;
 
 
-public class Offering {
+public class Offering extends BaseDomain {
 	private String id;
 	private Course course;
 	private int section;

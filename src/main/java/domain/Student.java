@@ -4,7 +4,7 @@ import java.util.List;
 
 import repository.StudentRepository;
 
-public class Student {
+public class Student extends BaseDomain {
 	private String id;
 	private String name;
 
