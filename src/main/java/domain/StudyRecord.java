@@ -26,7 +26,7 @@ public class StudyRecord extends BaseDomain {
 		return (offering.getCourse().equals(c)) && (grade >= 10);
 	}
 	
-	public boolean isCurrentTermRec(Course c) {
+	public boolean isCurrentTermRecNotCompleted(Course c) {
 		return (offering.getCourse().equals(c)) && (grade == -1);
 	}
 

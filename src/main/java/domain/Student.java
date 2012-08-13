@@ -3,6 +3,7 @@ package domain;
 import java.util.List;
 
 import repository.StudentRepository;
+import repository.TermRepository;
 
 public class Student extends BaseDomain {
 	private String id;
@@ -33,7 +34,7 @@ public class Student extends BaseDomain {
 
 	public boolean hasTakenThisTerm(Offering c) {
 		for (StudyRecord rec : getStudyRecords())
-			if (rec.isCurrentTermRec(c.getCourse()))
+			if (rec.isCurrentTermRecNotCompleted(c.getCourse()))
 				return true;
 		return false;
 	}
@@ -44,19 +45,6 @@ public class Student extends BaseDomain {
 				return true;
 		}
 		return false;
-	}
-
-	public double getGPA() {
-		int totalUnits = 0;
-		double weightedScoreSum = 0;
-
-		for (StudyRecord rec : getStudyRecords()) {
-			if (rec.getGrade() != -1) {
-				totalUnits += rec.getUnits();
-				weightedScoreSum += rec.getWeightedScore();
-			}
-		}
-		return weightedScoreSum / totalUnits;
 	}
 
 	public double getTermGPA(Term term) {
@@ -86,5 +74,16 @@ public class Student extends BaseDomain {
 	public String getName() {
 		return name;
 	}
+	
+	//#ADDED
+	public int getCurrentTermUnits() {
+		int currentTermUnits = 0;
+		Term currentTerm = TermRepository.getInstance().findCurrentTerm();
+		for (StudyRecord rec : getStudyRecords())
+			if (rec.getOffering().getTerm().equals(currentTerm))
+				currentTermUnits += rec.getOffering().getCourse().getUnits();
+		return currentTermUnits;
+	}
+	//###
 
 }

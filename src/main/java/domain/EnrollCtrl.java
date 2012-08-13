@@ -15,8 +15,12 @@ public class EnrollCtrl {
 		hasPassedPre(s, offering);
 		hasNotPassed(s, offering);
 		hasNotTakenThisTerm(s, offering);
+		//#ADDED
+		isNotMoreThan20Unitis(s, offering);
+		//###
 		s.takeOffering(offering);
 	}
+
 
 	public void hasPassedPre(Student s, Offering o) throws EnrollmentRulesViolationException {
 		if (!o.hasPassedPre(s))
@@ -26,7 +30,6 @@ public class EnrollCtrl {
 	public void hasNotPassed(Student s, Offering o) throws EnrollmentRulesViolationException {
 		if (s.hasPassed(o.getCourse()))
 			throw new EnrollmentRulesViolationException("Has already passed: " + o.getCourse());
-			
 	}
 
 	public void hasNotTakenThisTerm(Student s, Offering o) throws EnrollmentRulesViolationException {
@@ -37,7 +40,12 @@ public class EnrollCtrl {
 	public List<Offering> getCurrentOfferings() {
 		return TermRepository.getInstance().findCurrentTerm().getOfferings();
 	}
-
+	//#ADDED
+	private void isNotMoreThan20Unitis(Student s, Offering offering) throws EnrollmentRulesViolationException {
+		if(offering.getCourse().getUnits() + s.getCurrentTermUnits() > 20)
+			throw new EnrollmentRulesViolationException("This enrollment makes current term units more than 20 (student already has " +s.getCurrentTermUnits() + " units");
+	}
+	//###	
 	public void enroll(String studentName, String offeringId)
 			throws UnknownOfferingsException, StudentNotFoundException,
 			EnrollmentRulesViolationException {
