@@ -11,6 +11,7 @@ public class Term extends BaseDomain{
 	private String name;
 	private Date startDate;
 	private List<Offering> offerings;
+	private TermRegulation termRegulation;
 
 	public Term(String name) {
 		this.name = name;
@@ -22,6 +23,13 @@ public class Term extends BaseDomain{
 		this.name = name;
 		this.startDate = startDate;
 		offerings = null;
+	}
+	public Term(String name, Date startDate, TermRegulation termRegulation) {
+		this.name = name;
+		this.startDate = startDate;
+		this.termRegulation = termRegulation;
+		offerings = null;
+		
 	}
 	
 	public void addOffering(Offering c) {
@@ -57,5 +65,13 @@ public class Term extends BaseDomain{
 			return true;
 		return super.equals(obj);
 	}
+
+	 public TermRegulation getTermRegulation(){
+	  return termRegulation;
+	 }
+	
+	 public void setTermRegulation(TermRegulation termRegulation){
+	  this.termRegulation = termRegulation;
+	 }
 	
 }
