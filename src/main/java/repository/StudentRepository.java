@@ -29,8 +29,10 @@ public class StudentRepository {
 			ResultSet rs = st.executeQuery("select * from student where name='" + name + "'");
 
 			Student student = null;
-			if (rs.next())
+			if (rs.next()) {
 				student = new Student(rs.getString("id"), rs.getString("name"));
+				student.setProgram(ProgramRepository.getInstance().findById(rs.getString("program_id")));
+			}
 			else
 				throw new StudentNotFoundException();
 			JDBCUtil.closeConnection(con);

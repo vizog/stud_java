@@ -36,10 +36,10 @@ public class TestDomain {
 	@Before
 	public void setUp() throws Exception {
 		ap = CourseRepository.getInstance().findById("ap");
-		List<Course> pres = CourseRepository.getInstance()
-				.findPrerequisitesForCourse(ap);
-		for (Course pre : pres)
-			ap.addPre(pre);
+//		List<Course> pres = CourseRepository.getInstance()
+//				.findPrerequisitesForCourse(ap);
+//		for (Course pre : pres)
+//			ap.addPre(pre);
 
 		dsOffering = OfferingRepository.getInstance().findById("ds1");
 
@@ -47,16 +47,16 @@ public class TestDomain {
 		math11 = OfferingRepository.getInstance().findById("math11");
 
 		math1 = CourseRepository.getInstance().findById("math1");
-		List<Course> mathPres = CourseRepository.getInstance()
-				.findPrerequisitesForCourse(math1);
-		for (Course pre : mathPres)
-			math1.addPre(pre);
+//		List<Course> mathPres = CourseRepository.getInstance()
+//				.findPrerequisitesForCourse(math1);
+//		for (Course pre : mathPres)
+//			math1.addPre(pre);
 
 		ds = CourseRepository.getInstance().findById("ds");
-		List<Course> dsPres = CourseRepository.getInstance()
-				.findPrerequisitesForCourse(ds);
-		for (Course pre : dsPres)
-			ds.addPre(pre);
+//		List<Course> dsPres = CourseRepository.getInstance()
+//				.findPrerequisitesForCourse(ds);
+//		for (Course pre : dsPres)
+//			ds.addPre(pre);
 
 		bebe = StudentRepository.getInstance().findByName("bebe");
 

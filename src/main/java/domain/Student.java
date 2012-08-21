@@ -2,12 +2,14 @@ package domain;
 
 import java.util.List;
 
+import repository.ProgramRepository;
 import repository.StudentRepository;
 import repository.TermRepository;
 
 public class Student extends BaseDomain {
 	private String id;
 	private String name;
+	private Program program;
 
 	private List<StudyRecord> studyRecords;
 
@@ -86,4 +88,16 @@ public class Student extends BaseDomain {
 	}
 	//###
 
+	public Program getProgram() {
+		return program;
+	}
+	
+	public void setProgram(Program program) {
+		this.program = program;
+	}
+
+	public boolean hasPassed(Requirement req) {
+		return hasPassed(req.getCourse());
+	}
+	
 }

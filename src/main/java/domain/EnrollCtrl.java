@@ -26,6 +26,15 @@ public class EnrollCtrl {
 	}
 
 
+//	public void hasPassedPre(Student s, Offering o) throws EnrollmentRulesViolationException {
+//		if(o.getTerm().getTermRegulation().isTakeWithoutPassPresAllowed()) {
+//			logger.debug("term regulation for offering " + o + " allows enrollment without passing prerequisites");
+//			return;
+//		}
+//		if (!o.hasPassedPre(s))
+//			throw new EnrollmentRulesViolationException("Has not passed pre for: " + o.getCourse());
+//	}
+	
 	public void hasPassedPre(Student s, Offering o) throws EnrollmentRulesViolationException {
 		if(o.getTerm().getTermRegulation().isTakeWithoutPassPresAllowed()) {
 			logger.debug("term regulation for offering " + o + " allows enrollment without passing prerequisites");
