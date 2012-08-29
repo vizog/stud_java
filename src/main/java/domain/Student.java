@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import repository.ProgramRepository;
@@ -24,7 +25,7 @@ public class Student extends BaseDomain {
 	}
 
 	public void takeOffering(Offering c, double grade) {
-		getStudyRecords().add(new StudyRecord(c, grade));
+		getStudyRecords().add(new StudyRecord(c, grade, 0));
 	}
 
 	public boolean hasTaken(Offering c) {
@@ -99,5 +100,11 @@ public class Student extends BaseDomain {
 	public boolean hasPassed(Requirement req) {
 		return hasPassed(req.getCourse());
 	}
-	
+
+	//for perf test:
+	public void addStudyRec(StudyRecord sr) {
+		if(studyRecords == null)
+			studyRecords = new ArrayList<StudyRecord>();
+		studyRecords.add(sr);
+	}
 }

@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import util.JDBCUtil;
 
 import domain.Offering;
@@ -45,6 +47,7 @@ public class StudentRepository {
 
 	public List<StudyRecord> findStudyRecordsForStudent(Student student) {
 		try {
+
 			Connection con = JDBCUtil.getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("select * from study_record where student_id='" + student.getId() + "'");
@@ -52,8 +55,8 @@ public class StudentRepository {
 			
 			List<StudyRecord> studyRecords = new ArrayList<StudyRecord>();
 			while (rs.next()) {
-				Offering offering = OfferingRepository.getInstance().findById(rs.getString("offering_id"));
-				studyRecords.add(new StudyRecord(offering, rs.getDouble("grade")));
+//				Offering offering = OfferingRepository.getInstance().findById(rs.getString("offering_id"));
+				studyRecords.add(new StudyRecord(null, rs.getDouble("grade"), rs.getInt("id")));
 			}
 			JDBCUtil.closeConnection(con);
 			return studyRecords;

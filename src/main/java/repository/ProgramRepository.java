@@ -74,6 +74,7 @@ public class ProgramRepository {
 				Course c = CourseRepository.getInstance().findById(rs.getString("course_id"));
 				req = new Requirement(id, null, c);
 			}
+			JDBCUtil.closeConnection(con);
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -97,6 +98,7 @@ public class ProgramRepository {
 						rs.getString("course_id"));
 				reqs.add(new Requirement(reqId, null, c));
 			}
+			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -115,6 +117,7 @@ public class ProgramRepository {
 			if (rs.next()) {
 				req = new Requirement(rs.getInt("id"), null, course);
 			}
+			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

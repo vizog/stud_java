@@ -5,13 +5,14 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import server.request.AbstractRequest;
 import server.request.IRequest;
 
 public class RequestBroker {
 	
 	private static final int KEEP_ALIVE_TIME = 10;
-	private static final int MAXIMUM_POOL_SIZE = 20;
-	private static final int CORE_POOL_SIZE = 5;
+	private static final int MAXIMUM_POOL_SIZE = 40;
+	private static final int CORE_POOL_SIZE = 20;
 	private ThreadPoolExecutor pool;
 	private static RequestBroker instance = new RequestBroker();
 	
@@ -25,7 +26,7 @@ public class RequestBroker {
 		return instance;
 	}
 	
-	public void processRequest(IRequest request) {
+	public void processRequest(AbstractRequest request) {
 		RequestExecutor worker = new RequestExecutor(request);
 		pool.execute(worker);
 	}

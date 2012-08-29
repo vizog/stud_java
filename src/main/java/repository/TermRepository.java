@@ -20,8 +20,9 @@ public class TermRepository {
 	}
 
 	public Term findCurrentTerm() {
+		Connection con = null;
 		try {
-			Connection con = JDBCUtil.getConnection();
+			con = JDBCUtil.getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("select * from term order by start_date desc");
 
@@ -41,13 +42,20 @@ public class TermRepository {
 					currentTerm.setTermRegulation(termRegulation);
 				}
 			
-			JDBCUtil.closeConnection(con);
+			
 			return currentTerm;
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			return null;
+		} finally {
+			try {
+				JDBCUtil.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return null;
 	}
 
@@ -62,6 +70,7 @@ public class TermRepository {
 			if (rs.next()) {
 				term = new Term(rs.getString("name"), rs.getDate("start_date"));
 				String regId = rs.getString("regulation_id");
+				
 				PreparedStatement st1 = con.prepareStatement("select * from term_regulation where id = ?");
 				st1.setString(1, regId);
 				st1.execute();

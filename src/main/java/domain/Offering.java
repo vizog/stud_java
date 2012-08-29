@@ -8,6 +8,7 @@ public class Offering extends BaseDomain {
 	private int section;
 	private Date examDate;
 	private Term term;
+	private boolean locked;
 	
 	public Offering(Course course, Term term) {
 		this.course = course;
@@ -31,6 +32,12 @@ public class Offering extends BaseDomain {
 		this.term = term;
 	}
 	
+	public Offering(String id, Course crs, Term term, java.sql.Date date,
+			int section, boolean locked) {
+		this(id,crs, term, date,section);
+		this.locked = locked;
+	}
+
 	public Course getCourse() {
 		return course;
 	}
@@ -65,5 +72,13 @@ public class Offering extends BaseDomain {
 	
 	public Term getTerm() {
 		return term;
+	}
+	
+	public boolean isLocked() {
+		return locked;
+	}
+	
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 }

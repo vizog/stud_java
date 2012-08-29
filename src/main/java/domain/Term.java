@@ -1,6 +1,7 @@
 package domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,8 +47,10 @@ public class Term extends BaseDomain{
 	}
 
 	public List<Offering> getOfferings() {
-		if (offerings == null)
+		if (offerings == null) {
 			offerings = OfferingRepository.getInstance().findOfferingsForTerm(this);
+			System.out.println("fetched");
+		}
 		return offerings;
 	}
 
@@ -63,6 +66,14 @@ public class Term extends BaseDomain{
 		return startDate;
 	}
 	
+	public void lockAllOfferings() {
+		for(Offering offering: getOfferings()) {
+			offering.setLocked(true);
+			OfferingRepository.getInstance().save(offering);
+		}
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(obj != null && obj instanceof Term && ((Term) obj).getName().equalsIgnoreCase(this.getName()))
@@ -76,6 +87,12 @@ public class Term extends BaseDomain{
 	
 	 public void setTermRegulation(TermRegulation termRegulation){
 	  this.termRegulation = termRegulation;
+	 }
+	 
+	 public void addOffering2(Offering o) {
+		 if(offerings == null)
+			 offerings = new ArrayList<Offering>();
+		 offerings.add(o);
 	 }
 	
 }
